@@ -1,0 +1,14 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    background-color: #EFEFEF;
+}
+
+div {
+    border: blue dashed 1px;
+}
+
+.section {
+    width: 100%;
+    height: 100%;
+}
