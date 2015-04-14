@@ -1,0 +1,129 @@
+@font-face {
+    font-family: Avenir;
+    src: url(/fonts/Avenir.ttf);
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    background-color: #F8F8F8;
+    overflow: hidden;
+    font-family: Avenir;
+}
+
+.section {
+    width: 100%;
+    height: 100%;
+}
+
+.content-container {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+}
+
+#nav-dots-container {
+    position: fixed;
+    right: 50px;
+    width: 15px;
+    height: 104px;
+}
+
+.nav-dot {
+    width: 13px;
+    height: 13px;
+    display: block;
+    border: 1px solid #BDBDBD;
+    position: relative;
+    margin: 10px 0px 10px 0px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.active-nav-dot {
+    background-color: #BDBDBD;
+}
+
+#intro-section {
+    text-align: center;
+    padding-top: 25vh;
+
+    h1 {
+        width: 100%;
+        font-size: 100px;
+    }
+}
+
+.left-content {
+    padding: 35vh 30px 0vh 30px;
+    left: 0vw;
+}
+
+.right-content {
+    padding: 35vh 90px 0vh 30px;
+    right: 0vw;
+}
+
+.left-content, .right-content {
+    position: absolute;
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .description {
+        font-size: 20px;
+    }
+}
+
+h1 {
+    color: #520008;
+    font-size: 50px;
+
+    .alt-heading {
+        color: #CD6771;
+    }
+}
+
+.sub-heading {
+    font-size: 24px;
+}
+
+#iphone-container {
+    position: fixed;
+    top: calc(~"100vh - 300px");
+    left: calc(~"50vw - 150px");
+    width: 300px;
+
+    #iphone-harness {
+        width: 100%;
+        height: auto;
+        position: absolute;
+    }
+
+    #iphone-cover {
+        top: 69px;
+        left: 19px;
+        position: absolute;
+        width: 261px;
+        height: 466px;
+    }
+
+    #iphone-screen-container {
+        top: 68px;
+        left: 18px;
+        position: absolute;
+        width: 261px;
+        height: 466px;
+        overflow: hidden;
+        display: inline;
+        float: left;
+        white-space: nowrap;
+
+        .iphone-screen {
+            width: 100%;
+        }
+    }
+
+}
