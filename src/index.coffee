@@ -5,11 +5,12 @@ $ ->
     MOUSEWHEEL_SCROLL_MODE = 1
     KEY_SCROLL_MODE = 2
     PHONE_HARNESS_LOWERED = 1
-    PHONE_HARNESS_RAISED = 2
+    PHONE_HARNESS_CENTERED = 2
+    PHONE_HARNESS_RAISED = 3
 
     # State variables.
     sectionHeight = $("#intro-section").outerHeight()
-    sectionNames = ["intro", "matches", "profile", "newsfeed"]
+    sectionNames = ["intro", "matches", "profile", "newsfeed", "signup"]
     currentSection = sectionNames[0]
     isCurrentlyScrolling = true
     scrollingMode = null
@@ -52,8 +53,10 @@ $ ->
         phoneHarnessState = state
         if phoneHarnessState == PHONE_HARNESS_LOWERED
             $("#iphone-container").animate({ top: "#{sectionHeight - 300}px" }, SECTION_TRANSITION_TIME)
-        else if phoneHarnessState == PHONE_HARNESS_RAISED
+        else if phoneHarnessState == PHONE_HARNESS_CENTERED
             $("#iphone-container").animate({ top: "#{(sectionHeight / 2) - 300}px" }, SECTION_TRANSITION_TIME)
+        else if phoneHarnessState == PHONE_HARNESS_RAISED
+            $("#iphone-container").animate({ top: "-300px" }, SECTION_TRANSITION_TIME)
 
     $("body").on {
         mousewheel: ((e) ->
@@ -120,19 +123,26 @@ $ ->
 
     willTransitionSections = (fromSection, toSection) ->
         # Slide the phone in or out of position.
-        if fromSection is "intro" and toSection isnt "intro"
-            setPhoneHarnessState PHONE_HARNESS_RAISED
+        if toSection not in ["intro", "signup"]
+            setPhoneHarnessState PHONE_HARNESS_CENTERED
             $("#iphone-cover").fadeOut SECTION_TRANSITION_TIME
-        else if fromSection isnt "intro" and toSection is "intro"
+        else if toSection is "intro"
             setPhoneHarnessState PHONE_HARNESS_LOWERED
+            $("#iphone-cover").fadeIn SECTION_TRANSITION_TIME
+        else if toSection is "signup"
+            setPhoneHarnessState PHONE_HARNESS_RAISED
             $("#iphone-cover").fadeIn SECTION_TRANSITION_TIME
         # Slide to the relevant app screen.
         if toSection isnt "intro"
             scrollPhoneToScreen toSection
 
-
-    $(".nav-dot").click (e) -> scrollToSection(e.target.id.replace("-nav-dot", ""), NAV_DOT_SCROLL_MODE) unless isCurrentlyScrolling
+    $(".nav-dot").click((e) ->
+        target = e.target.id.replace("-nav-dot", "")
+        scrollToSection(target, NAV_DOT_SCROLL_MODE) unless isCurrentlyScrolling
+    )
 
     # HACK Is there a better way to do this just in LESS?
     $("#nav-dots-container").css { top: "calc(50% - 52px)" }
     $("#iphone-screen-container").scrollLeft(263)
+
+    $(window).resize -> sectionHeight = $("#intro-section").outerHeight()

@@ -1,13 +1,14 @@
 (function() {
   $(function() {
-    var KEY_SCROLL_MODE, MOUSEWHEEL_SCROLL_MODE, NAV_DOT_SCROLL_MODE, PHONE_HARNESS_LOWERED, PHONE_HARNESS_RAISED, SECTION_TRANSITION_TIME, STARTUP_RESET_TIME, currentSection, handleSectionPaging, isCurrentlyScrolling, keyWillScrollDocument, nextSection, phoneHarnessState, previousSection, scrollDelayMsForscrollingMode, scrollPhoneToScreen, scrollToSection, scrollingMode, sectionHeight, sectionNames, sectionOffset, setPhoneHarnessState, stopEventFromPropagating, targetSection, updateNavDots, willTransitionSections;
+    var KEY_SCROLL_MODE, MOUSEWHEEL_SCROLL_MODE, NAV_DOT_SCROLL_MODE, PHONE_HARNESS_CENTERED, PHONE_HARNESS_LOWERED, PHONE_HARNESS_RAISED, SECTION_TRANSITION_TIME, STARTUP_RESET_TIME, currentSection, handleSectionPaging, isCurrentlyScrolling, keyWillScrollDocument, nextSection, phoneHarnessState, previousSection, scrollDelayMsForscrollingMode, scrollPhoneToScreen, scrollToSection, scrollingMode, sectionHeight, sectionNames, sectionOffset, setPhoneHarnessState, stopEventFromPropagating, targetSection, updateNavDots, willTransitionSections;
     NAV_DOT_SCROLL_MODE = 0;
     MOUSEWHEEL_SCROLL_MODE = 1;
     KEY_SCROLL_MODE = 2;
     PHONE_HARNESS_LOWERED = 1;
-    PHONE_HARNESS_RAISED = 2;
+    PHONE_HARNESS_CENTERED = 2;
+    PHONE_HARNESS_RAISED = 3;
     sectionHeight = $("#intro-section").outerHeight();
-    sectionNames = ["intro", "matches", "profile", "newsfeed"];
+    sectionNames = ["intro", "matches", "profile", "newsfeed", "signup"];
     currentSection = sectionNames[0];
     isCurrentlyScrolling = true;
     scrollingMode = null;
@@ -55,9 +56,13 @@
         return $("#iphone-container").animate({
           top: (sectionHeight - 300) + "px"
         }, SECTION_TRANSITION_TIME);
-      } else if (phoneHarnessState === PHONE_HARNESS_RAISED) {
+      } else if (phoneHarnessState === PHONE_HARNESS_CENTERED) {
         return $("#iphone-container").animate({
           top: ((sectionHeight / 2) - 300) + "px"
+        }, SECTION_TRANSITION_TIME);
+      } else if (phoneHarnessState === PHONE_HARNESS_RAISED) {
+        return $("#iphone-container").animate({
+          top: "-300px"
         }, SECTION_TRANSITION_TIME);
       }
     };
@@ -146,11 +151,14 @@
       }
     };
     willTransitionSections = function(fromSection, toSection) {
-      if (fromSection === "intro" && toSection !== "intro") {
-        setPhoneHarnessState(PHONE_HARNESS_RAISED);
+      if (toSection !== "intro" && toSection !== "signup") {
+        setPhoneHarnessState(PHONE_HARNESS_CENTERED);
         $("#iphone-cover").fadeOut(SECTION_TRANSITION_TIME);
-      } else if (fromSection !== "intro" && toSection === "intro") {
+      } else if (toSection === "intro") {
         setPhoneHarnessState(PHONE_HARNESS_LOWERED);
+        $("#iphone-cover").fadeIn(SECTION_TRANSITION_TIME);
+      } else if (toSection === "signup") {
+        setPhoneHarnessState(PHONE_HARNESS_RAISED);
         $("#iphone-cover").fadeIn(SECTION_TRANSITION_TIME);
       }
       if (toSection !== "intro") {
@@ -158,14 +166,19 @@
       }
     };
     $(".nav-dot").click(function(e) {
+      var target;
+      target = e.target.id.replace("-nav-dot", "");
       if (!isCurrentlyScrolling) {
-        return scrollToSection(e.target.id.replace("-nav-dot", ""), NAV_DOT_SCROLL_MODE);
+        return scrollToSection(target, NAV_DOT_SCROLL_MODE);
       }
     });
     $("#nav-dots-container").css({
       top: "calc(50% - 52px)"
     });
-    return $("#iphone-screen-container").scrollLeft(263);
+    $("#iphone-screen-container").scrollLeft(263);
+    return $(window).resize(function() {
+      return sectionHeight = $("#intro-section").outerHeight();
+    });
   });
 
 }).call(this);
