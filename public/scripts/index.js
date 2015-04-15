@@ -138,11 +138,11 @@
     scrollPhoneToScreen = function(screen) {
       if (screen === "matches") {
         return $("#iphone-screen-container").animate({
-          scrollLeft: "263px"
+          scrollLeft: "0px"
         }, SECTION_TRANSITION_TIME);
       } else if (screen === "profile") {
         return $("#iphone-screen-container").animate({
-          scrollLeft: "0px"
+          scrollLeft: "263px"
         }, SECTION_TRANSITION_TIME);
       } else if (screen === "newsfeed") {
         return $("#iphone-screen-container").animate({
@@ -175,7 +175,6 @@
     $("#nav-dots-container").css({
       top: "calc(50% - 52px)"
     });
-    $("#iphone-screen-container").scrollLeft(263);
     return $(window).resize(function() {
       return sectionHeight = $("#intro-section").outerHeight();
     });

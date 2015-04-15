@@ -115,9 +115,9 @@ $ ->
 
     scrollPhoneToScreen = (screen) ->
         if screen is "matches"
-            $("#iphone-screen-container").animate({scrollLeft: "263px"}, SECTION_TRANSITION_TIME)
-        else if screen is "profile"
             $("#iphone-screen-container").animate({scrollLeft: "0px"}, SECTION_TRANSITION_TIME)
+        else if screen is "profile"
+            $("#iphone-screen-container").animate({scrollLeft: "263px"}, SECTION_TRANSITION_TIME)
         else if screen is "newsfeed"
             $("#iphone-screen-container").animate({scrollLeft: "526px"}, SECTION_TRANSITION_TIME)
 
@@ -143,6 +143,4 @@ $ ->
 
     # HACK Is there a better way to do this just in LESS?
     $("#nav-dots-container").css { top: "calc(50% - 52px)" }
-    $("#iphone-screen-container").scrollLeft(263)
-
     $(window).resize -> sectionHeight = $("#intro-section").outerHeight()
