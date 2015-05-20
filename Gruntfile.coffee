@@ -3,11 +3,21 @@ module.exports = (grunt) ->
     grunt.initConfig {
         coffee: {
             build: {
-                ext: ".js",
-                flatten: true,
-                expand: true,
-                src: "src/*.coffee",
-                dest: "public/scripts/"
+                files: [
+                    {
+                        ext: ".js",
+                        flatten: true,
+                        expand: true,
+                        src: "src/*.coffee",
+                        dest: "public/scripts/"
+                    }, {
+                        ext: ".js",
+                        flatten: true,
+                        expand: true,
+                        src: "app.coffee",
+                        dest: "bin/"
+                    }
+                ]
             }
         },
         less: {
