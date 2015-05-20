@@ -19,6 +19,9 @@ app.get "/gender", (req, res) ->
     if !req.query.secret? or sha.update(req.query.secret).digest("hex") != SECRET_DIGEST
         return res.status(402).jsonp { error: "Authentication failed." }
 
+    if !req.query.names? or req.query.names == ""
+        return res.status(403).jsonp { error: "Failed to parse names." }
+
     args = ["bin/gender/genderize.py"]
     args.push(name) for name in req.query.names.split(",")
     process = childProcess.spawn "python", args

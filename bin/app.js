@@ -34,6 +34,11 @@
         error: "Authentication failed."
       });
     }
+    if ((req.query.names == null) || req.query.names === "") {
+      return res.status(403).jsonp({
+        error: "Failed to parse names."
+      });
+    }
     args = ["bin/gender/genderize.py"];
     ref = req.query.names.split(",");
     for (i = 0, len = ref.length; i < len; i++) {
