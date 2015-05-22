@@ -22,9 +22,8 @@ app.get "/gender", (req, res) ->
     if !req.query.names? or req.query.names == ""
         return res.status(403).jsonp { error: "Failed to parse names." }
 
-    args = ["bin/gender/genderize.py"]
-    args.push(name) for name in req.query.names.split(",")
-    process = childProcess.spawn "python", args
+    args = (name for name in req.query.names.split(","))
+    process = childProcess.spawn "./bin/gender/genderize", args
     responseObject = { error: "An unexpected error occurred." }
     process.stdout.on "data", (data) -> responseObject = JSON.parse data.toString()
     process.stderr.on "data", (data) -> responseObject.error = data.toString()

@@ -1,2 +1,6 @@
+echo "Compiling assets..."
 grunt
+echo "Compiling genderizer..."
+g++ -O2 -std=c++11 -o bin/gender/genderize bin/gender/genderize.cpp
+echo "Running server..."
 ./bin/www

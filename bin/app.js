@@ -26,7 +26,7 @@
   });
 
   app.get("/gender", function(req, res) {
-    var args, i, len, name, process, ref, responseObject, sha;
+    var args, name, process, responseObject, sha;
     res.setHeader("Content-Type", "application/json");
     sha = crypto.createHash("sha256");
     if ((req.query.secret == null) || sha.update(req.query.secret).digest("hex") !== SECRET_DIGEST) {
@@ -39,13 +39,17 @@
         error: "Failed to parse names."
       });
     }
-    args = ["bin/gender/genderize.py"];
-    ref = req.query.names.split(",");
-    for (i = 0, len = ref.length; i < len; i++) {
-      name = ref[i];
-      args.push(name);
-    }
-    process = childProcess.spawn("python", args);
+    args = (function() {
+      var i, len, ref, results;
+      ref = req.query.names.split(",");
+      results = [];
+      for (i = 0, len = ref.length; i < len; i++) {
+        name = ref[i];
+        results.push(name);
+      }
+      return results;
+    })();
+    process = childProcess.spawn("./bin/gender/genderize", args);
     responseObject = {
       error: "An unexpected error occurred."
     };
