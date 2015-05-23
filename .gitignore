@@ -29,3 +29,4 @@ node_modules
 .DS_Store
 
 bin/gender/genderize
+perf_test

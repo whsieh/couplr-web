@@ -3,6 +3,8 @@
 
 #include <vector>
 
+const size_t MAX_ALLOWED_TABLE_SIZE = 2000;
+
 template <typename T>
 /**
  * A fast, simple and dumb hash map that only supports insertion and lookups.
@@ -17,7 +19,7 @@ public:
     {
         this->missingValue = missingValue;
         this->hash = std::hash<std::string>();
-        this->table = std::vector<HashChain>(capacity);
+        this->table = std::vector<HashChain>(std::min<size_t>(capacity, MAX_ALLOWED_TABLE_SIZE));
         for (int index = 0; index < capacity; index++)
             this->table.push_back(HashChain());
     }

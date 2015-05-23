@@ -114,12 +114,18 @@ int main(int argc, char* argv[])
         cout << "{ \"error\": \"the server failed to parse linear SVC data.\"}";
         return 1;
     }
+    ConstantSizeStringMap<bool> inputNames(argc, false);
     cout << "{";
     for (int i = 1; i < argc; i++) {
         string name = string(argv[i]);
-        cout << "\"" << name << "\"" << ":" << genderClassifier.predict(name);
-        if (i != argc - 1)
+        if (inputNames.get(name))
+            continue;
+
+        if (i != 0)
             cout << ",";
+
+        cout << "\"" << name << "\"" << ":" << genderClassifier.predict(name);
+        inputNames.insert(name, true);
     }
     cout << "}";
     cout.flush();
