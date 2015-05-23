@@ -24,11 +24,20 @@ bool loadLinearSVCJSONFromFile(const string& filename, Json::Value& svcJSON)
     return reader.parse(buffer.str(), svcJSON);
 }
 
+void toLowerCase(string &str)
+{
+    const int length = str.length();
+    for(int i = 0; i < length; i++)
+        str[i] = tolower(str[i]);
+}
+
 class GenderClassifier
 {
 public:
     GenderClassifier(const string& filename)
     {
+        ngramCoefficients = NULL;
+        nameGenderMap = NULL;
         Json::Value svcJSON;
         if (loadLinearSVCJSONFromFile(filename, svcJSON)) {
             // Load the intercept and threshold.
@@ -59,8 +68,9 @@ public:
         if (nameGenderMap) delete nameGenderMap;
     }
 
-    int predict(const string& name)
+    int predict(string name)
     {
+        toLowerCase(name);
         int prediction = nameGenderMap->get(name);
         if (prediction != UNDETERMINED)
             return prediction;
@@ -101,8 +111,8 @@ private:
         return norm != 0 ? dotproduct / norm + intercept : 0;
     }
 
-    ConstantSizeStringMap<float>* ngramCoefficients = NULL;
-    ConstantSizeStringMap<int>* nameGenderMap = NULL;
+    ConstantSizeStringMap<float>* ngramCoefficients;
+    ConstantSizeStringMap<int>* nameGenderMap;
     float intercept;
     float uncertaintyThreshold;
 };
@@ -121,7 +131,7 @@ int main(int argc, char* argv[])
         if (inputNames.get(name))
             continue;
 
-        if (i != 0)
+        if (i != 1)
             cout << ",";
 
         cout << "\"" << name << "\"" << ":" << genderClassifier.predict(name);
