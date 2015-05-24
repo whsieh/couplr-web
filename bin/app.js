@@ -19,6 +19,12 @@
     });
   });
 
+  app.get("/mobile", function(req, res) {
+    return res.sendFile("mobile.html", {
+      root: "./public"
+    });
+  });
+
   app.get("/", function(req, res) {
     return res.sendFile("index.html", {
       root: "./public"

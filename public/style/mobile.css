@@ -1,0 +1,100 @@
+@font-face {
+  font-family: Avenir;
+  src: url(/fonts/Avenir.ttf);
+}
+body {
+  padding: 0px;
+  margin: 0px;
+  background-color: #F8F8F8;
+  font-family: Avenir;
+}
+h1 {
+  color: #520008;
+  font-weight: 400;
+}
+h1 .alt-heading {
+  color: #CD6771;
+}
+.section {
+  width: 100%;
+  position: relative;
+}
+#intro-section,
+#signup-section {
+  text-align: center;
+  padding-top: 20px;
+}
+#intro-section .content-area,
+#signup-section .content-area {
+  padding-top: 20vh;
+}
+#intro-section .sub-heading,
+#signup-section .sub-heading {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+#intro-section h1 {
+  font-size: 55px;
+}
+#match-section,
+#profile-section,
+#newsfeed-section {
+  text-align: center;
+}
+#match-section h1,
+#profile-section h1,
+#newsfeed-section h1 {
+  padding-top: 5vh;
+  padding-left: 10px;
+  font-size: 30px;
+}
+#match-section p,
+#profile-section p,
+#newsfeed-section p {
+  font-size: 20px;
+  padding: 0 5vw;
+}
+#match-section .iphone-container,
+#profile-section .iphone-container,
+#newsfeed-section .iphone-container {
+  position: relative;
+  width: 215px;
+  height: 434px;
+  margin: 0 auto;
+  padding-top: 0px;
+  opacity: 0;
+}
+#match-section .iphone-container img,
+#profile-section .iphone-container img,
+#newsfeed-section .iphone-container img {
+  position: absolute;
+}
+#match-section .iphone-container .iphone-harness,
+#profile-section .iphone-container .iphone-harness,
+#newsfeed-section .iphone-container .iphone-harness {
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+}
+#match-section .iphone-container .iphone-screen,
+#profile-section .iphone-container .iphone-screen,
+#newsfeed-section .iphone-container .iphone-screen {
+  top: 45px;
+  left: 15px;
+  height: calc(100% - 90px);
+  width: calc(100% - 30px);
+}
+#match-section h1 {
+  padding-top: 20vh;
+}
+#signup-section h1 {
+  margin-top: 25vh;
+  font-size: 40px;
+}
+#signup-section p {
+  padding: 0 5vw;
+}
+#signup-section a {
+  margin-bottom: 50vh;
+}

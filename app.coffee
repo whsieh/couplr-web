@@ -10,6 +10,9 @@ app.use express.static("public")
 app.get "/about", (req, res) ->
     res.sendFile("about.html", {root: "./public"})
 
+app.get "/mobile", (req, res) ->
+    res.sendFile("mobile.html", {root: "./public"})
+
 app.get "/", (req, res) ->
     res.sendFile("index.html", {root: "./public"})
 

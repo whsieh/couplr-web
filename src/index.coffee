@@ -1,4 +1,5 @@
 $ ->
+    if window.orientation? then window.location.href = "/mobile"
 
     # State flag constants.
     NAV_DOT_SCROLL_MODE = 0

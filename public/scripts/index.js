@@ -1,6 +1,9 @@
 (function() {
   $(function() {
     var KEY_SCROLL_MODE, MOUSEWHEEL_SCROLL_MODE, NAV_DOT_SCROLL_MODE, PHONE_HARNESS_CENTERED, PHONE_HARNESS_LOWERED, PHONE_HARNESS_RAISED, SECTION_TRANSITION_TIME, STARTUP_RESET_TIME, currentSection, handleSectionPaging, isCurrentlyScrolling, keyWillScrollDocument, nextSection, phoneHarnessState, previousSection, scrollDelayMsForscrollingMode, scrollPhoneToScreen, scrollToSection, scrollingMode, sectionHeight, sectionNames, sectionOffset, setPhoneHarnessState, stopEventFromPropagating, targetSection, updateNavDots, willTransitionSections;
+    if (window.orientation != null) {
+      window.location.href = "/mobile";
+    }
     NAV_DOT_SCROLL_MODE = 0;
     MOUSEWHEEL_SCROLL_MODE = 1;
     KEY_SCROLL_MODE = 2;
