@@ -13,6 +13,7 @@ $ () ->
         return 4
 
     previousSectionIndex = computeCurrentSectionIndex()
+    userHasScrolledPastIntro = false
     animationQueues = [
         {reveal: false, hide: false},
         {reveal: false, hide: false},
@@ -23,6 +24,10 @@ $ () ->
 
     $(window).scroll () ->
         currentSectionIndex = computeCurrentSectionIndex()
+        if not userHasScrolledPastIntro and currentSectionIndex != 0
+            didBeginScrolling()
+            userHasScrolledPastIntro = true
+
         if previousSectionIndex isnt currentSectionIndex
             scrollViewDidTransition(previousSectionIndex, currentSectionIndex)
             previousSectionIndex = currentSectionIndex
@@ -78,3 +83,11 @@ $ () ->
             when 1 then revealMatchSection()
             when 2 then revealProfileSection()
             when 3 then revealNewsfeedSection()
+
+    didBeginScrolling = () ->
+        $("#match-text-content").animate({
+            opacity: 1
+        }, 750)
+        $("#intro-scroll-message").animate({
+            opacity: 0
+        }, 750)

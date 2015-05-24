@@ -85,8 +85,19 @@ h1 .alt-heading {
   height: calc(100% - 90px);
   width: calc(100% - 30px);
 }
-#match-section h1 {
-  padding-top: 20vh;
+#match-section #match-text-content {
+  opacity: 0;
+}
+#match-section #intro-scroll-message {
+  opacity: 1;
+  padding-top: 22vh;
+}
+#match-section #intro-scroll-message p {
+  font-size: 16px;
+}
+#match-section #intro-scroll-message img {
+  width: 20px;
+  height: auto;
 }
 #signup-section h1 {
   margin-top: 25vh;
@@ -97,4 +108,8 @@ h1 .alt-heading {
 }
 #signup-section a {
   margin-bottom: 50vh;
+}
+#attribution {
+  text-align: center;
+  font-size: 5px;
 }

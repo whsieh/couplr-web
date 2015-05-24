@@ -1,6 +1,6 @@
 (function() {
   $(function() {
-    var animateSectionIndexWithGuard, animationQueues, computeCurrentSectionIndex, currentThreshold, hideIntroSection, hideMatchSection, hideNewsfeedSection, hideProfileSection, i, index, len, makeContentSectionAnimator, previousSectionIndex, previousThreshold, ref, revealIntroSection, revealMatchSection, revealNewsfeedSection, revealProfileSection, scrollViewDidTransition, sectionId, sectionIds, sectionOffsets;
+    var animateSectionIndexWithGuard, animationQueues, computeCurrentSectionIndex, currentThreshold, didBeginScrolling, hideIntroSection, hideMatchSection, hideNewsfeedSection, hideProfileSection, i, index, len, makeContentSectionAnimator, previousSectionIndex, previousThreshold, ref, revealIntroSection, revealMatchSection, revealNewsfeedSection, revealProfileSection, scrollViewDidTransition, sectionId, sectionIds, sectionOffsets, userHasScrolledPastIntro;
     sectionIds = ["#intro-section", "#match-section", "#profile-section", "#newsfeed-section", "#signup-section"];
     sectionOffsets = [];
     ref = sectionIds.slice().splice(1);
@@ -21,6 +21,7 @@
       return 4;
     };
     previousSectionIndex = computeCurrentSectionIndex();
+    userHasScrolledPastIntro = false;
     animationQueues = [
       {
         reveal: false,
@@ -42,6 +43,10 @@
     $(window).scroll(function() {
       var currentSectionIndex;
       currentSectionIndex = computeCurrentSectionIndex();
+      if (!userHasScrolledPastIntro && currentSectionIndex !== 0) {
+        didBeginScrolling();
+        userHasScrolledPastIntro = true;
+      }
       if (previousSectionIndex !== currentSectionIndex) {
         scrollViewDidTransition(previousSectionIndex, currentSectionIndex);
         return previousSectionIndex = currentSectionIndex;
@@ -89,8 +94,7 @@
         return animationQueues[sectionIndex][action] = false;
       });
     };
-    return scrollViewDidTransition = function(previousSectionIndex, currentSectionIndex) {
-      console.log("From " + previousSectionIndex + " to " + currentSectionIndex);
+    scrollViewDidTransition = function(previousSectionIndex, currentSectionIndex) {
       switch (previousSectionIndex) {
         case 0:
           hideIntroSection();
@@ -114,6 +118,14 @@
         case 3:
           return revealNewsfeedSection();
       }
+    };
+    return didBeginScrolling = function() {
+      $("#match-text-content").animate({
+        opacity: 1
+      }, 750);
+      return $("#intro-scroll-message").animate({
+        opacity: 0
+      }, 750);
     };
   });
 
