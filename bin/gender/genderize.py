@@ -70,6 +70,5 @@ class GenderClassifier(object):
 if __name__ == "__main__":
     cls = GenderClassifier("bin/gender/linsvc.json")
     response = {}
-    for name in sys.argv[1:]:
-        response[name] = cls.gender(name)
-    print json.dumps(response)
+    print json.dumps({ name: cls.gender(name) for name in sys.argv[1:] })
+

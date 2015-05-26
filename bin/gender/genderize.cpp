@@ -98,7 +98,7 @@ private:
         size_t nameLength = nameWithStartAndEndChars.size();
         // For 2-, 3- and 4-grams...
         for (int n = 2; n < 5; n++) {
-            // For each character in the name...
+            // For each consecutive chunk of characters...
             for (int cursor = 0; cursor <= nameLength - n; cursor++) {
                 string gram = nameWithStartAndEndChars.substr(cursor, n);
                 float coefficient = ngramCoefficients->get(gram);
@@ -121,7 +121,7 @@ int main(int argc, char* argv[])
 {
     GenderClassifier genderClassifier("bin/gender/linsvc.json");
     if (!genderClassifier.successfullyInitialized()) {
-        cout << "{ \"error\": \"the server failed to parse linear SVC data.\"}";
+        cout << "{\"error\": \"the server failed to parse linear SVC data.\"}";
         return 1;
     }
     ConstantSizeStringMap<bool> inputNames(argc, false);
