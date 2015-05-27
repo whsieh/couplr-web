@@ -1,0 +1,72 @@
+@font-face {
+  font-family: Avenir;
+  src: url(/fonts/Avenir.ttf);
+}
+body {
+  padding: 0px;
+  margin: 0px;
+  background-color: #F8F8F8;
+  font-family: Avenir;
+  text-align: center;
+}
+h1 {
+  color: #520008;
+  font-weight: 400;
+}
+h1 .alt-heading {
+  color: #CD6771;
+}
+#title-container {
+  padding-top: 50px;
+}
+#title-container h1 {
+  font-size: 60px;
+}
+#dev-portraits-container {
+  margin: 40px auto 0px auto;
+  width: 100%;
+  height: 100px;
+}
+#dev-portraits-container #portrait-row {
+  height: 100px;
+  margin: 0 auto;
+  display: inline-block;
+}
+#dev-portraits-container #portrait-row .portrait + .portrait {
+  margin-left: 20px;
+  display: inline-block;
+}
+#dev-portraits-container #portrait-row .portrait {
+  float: left;
+  border: gray 3px solid;
+  border-radius: 50%;
+  width: 106px;
+  height: 106px;
+}
+#dev-portraits-container #portrait-row .portrait img {
+  width: 100px;
+  height: 100px;
+  opacity: 0.75;
+  border-radius: 50%;
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+#dev-portraits-container #portrait-row .portrait img:hover {
+  cursor: pointer;
+}
+#dev-description-container {
+  margin: 50px auto 25px auto;
+  width: calc(50% + 80px);
+  font-size: 20px;
+  text-align: justify;
+  position: relative;
+}
+#dev-description-container .description {
+  position: absolute;
+  opacity: 0;
+  top: 20px;
+  display: none;
+}
