@@ -110,6 +110,14 @@ h1 .alt-heading {
   margin-bottom: 40vh;
 }
 #attribution {
-  text-align: center;
+  position: absolute;
   font-size: 5px;
+  bottom: 5px;
+  left: 10px;
+}
+#about-link {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  font-size: 12px;
 }

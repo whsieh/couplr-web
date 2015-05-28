@@ -163,9 +163,13 @@
       } else if (toSection === "signup") {
         setPhoneHarnessState(PHONE_HARNESS_RAISED);
         $("#iphone-cover").fadeIn(SECTION_TRANSITION_TIME);
+        $("#about-link").fadeIn(SECTION_TRANSITION_TIME);
       }
       if (toSection !== "intro") {
-        return scrollPhoneToScreen(toSection);
+        scrollPhoneToScreen(toSection);
+      }
+      if (fromSection === "signup") {
+        return $("#about-link").fadeOut(SECTION_TRANSITION_TIME);
       }
     };
     $(".nav-dot").click(function(e) {

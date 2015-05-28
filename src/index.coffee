@@ -133,9 +133,13 @@ $ ->
         else if toSection is "signup"
             setPhoneHarnessState PHONE_HARNESS_RAISED
             $("#iphone-cover").fadeIn SECTION_TRANSITION_TIME
+            $("#about-link").fadeIn SECTION_TRANSITION_TIME
         # Slide to the relevant app screen.
         if toSection isnt "intro"
             scrollPhoneToScreen toSection
+        # Hide the about link when leaving the signup section.
+        if fromSection is "signup"
+            $("#about-link").fadeOut SECTION_TRANSITION_TIME
 
     $(".nav-dot").click((e) ->
         target = e.target.id.replace("-nav-dot", "")

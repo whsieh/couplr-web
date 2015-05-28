@@ -54,6 +54,16 @@ body {
 #signup-section .signup-button {
   font-size: 20px;
 }
+#signup-section #about-link {
+  font-size: 18px;
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+  display: none;
+}
+#signup-section #about-link:hover {
+  text-decoration: none;
+}
 #intro-section {
   text-align: center;
   padding-top: 20vh;
