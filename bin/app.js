@@ -71,6 +71,12 @@
     });
   });
 
+  app.get("/support", function(req, res) {
+    return res.sendFile("support.html", {
+      root: "./public"
+    });
+  });
+
   module.exports = app;
 
 }).call(this);

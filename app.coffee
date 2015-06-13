@@ -34,4 +34,7 @@ app.get "/gender", (req, res) ->
         res.status(if responseObject.error? then 401 else 200)
         res.jsonp responseObject
 
+app.get "/support", (req, res) ->
+    res.sendFile("support.html", {root: "./public"})
+
 module.exports = app
