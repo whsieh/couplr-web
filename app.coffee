@@ -7,14 +7,20 @@ SECRET_DIGEST = "65eb608c22cff0e6c4a4bef0aa04eae4e3cc6e9c42adf53965a26a57e584c7b
 
 app.use express.static("public")
 
+app.get "/", (req, res) ->
+    res.sendFile("index.html", {root: "./public"})
+
 app.get "/about", (req, res) ->
     res.sendFile("about.html", {root: "./public"})
 
 app.get "/mobile", (req, res) ->
     res.sendFile("mobile.html", {root: "./public"})
 
-app.get "/", (req, res) ->
-    res.sendFile("index.html", {root: "./public"})
+app.get "/support", (req, res) ->
+    res.sendFile("support.html", {root: "./public"})
+
+app.get "/privacy", (req, res) ->
+    res.sendFile("privacy.html", {root: "./public"})
 
 app.get "/gender", (req, res) ->
     res.setHeader "Content-Type", "application/json"
@@ -33,8 +39,5 @@ app.get "/gender", (req, res) ->
     process.on "close", () ->
         res.status(if responseObject.error? then 401 else 200)
         res.jsonp responseObject
-
-app.get "/support", (req, res) ->
-    res.sendFile("support.html", {root: "./public"})
 
 module.exports = app

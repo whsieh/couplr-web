@@ -13,6 +13,12 @@
 
   app.use(express["static"]("public"));
 
+  app.get("/", function(req, res) {
+    return res.sendFile("index.html", {
+      root: "./public"
+    });
+  });
+
   app.get("/about", function(req, res) {
     return res.sendFile("about.html", {
       root: "./public"
@@ -25,8 +31,14 @@
     });
   });
 
-  app.get("/", function(req, res) {
-    return res.sendFile("index.html", {
+  app.get("/support", function(req, res) {
+    return res.sendFile("support.html", {
+      root: "./public"
+    });
+  });
+
+  app.get("/privacy", function(req, res) {
+    return res.sendFile("privacy.html", {
       root: "./public"
     });
   });
@@ -68,12 +80,6 @@
     return process.on("close", function() {
       res.status(responseObject.error != null ? 401 : 200);
       return res.jsonp(responseObject);
-    });
-  });
-
-  app.get("/support", function(req, res) {
-    return res.sendFile("support.html", {
-      root: "./public"
     });
   });
 
